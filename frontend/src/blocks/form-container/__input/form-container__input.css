@@ -1,0 +1,16 @@
+.form-container__input {
+    max-width: 358px;
+    min-height: 27px;
+    background-color: #0000;
+    border: none;
+    border-bottom: 2px solid #CCCCCC;
+    margin-bottom: 30px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.21;
+
+    color: #FFFFFF;
+}

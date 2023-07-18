@@ -1,0 +1,11 @@
+.form-container__button-title {
+    max-width: 190px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.22;
+    text-align: center;
+    color: #000000;
+    margin: 14px 84px;
+}

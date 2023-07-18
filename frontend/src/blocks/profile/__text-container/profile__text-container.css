@@ -1,0 +1,10 @@
+.profile__text-container {
+  margin-left: 3.75px;
+  align-self: center;
+}
+
+@media (max-width: 320px) {
+  .profile__text-container {
+    margin-top: 22.25px;
+  }
+}

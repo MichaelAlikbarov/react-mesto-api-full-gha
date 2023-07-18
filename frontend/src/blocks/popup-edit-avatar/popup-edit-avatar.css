@@ -1,0 +1,17 @@
+.popup-edit-avatar {
+  width: 430px;
+  max-height: 272px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  background: #FFFFFF;
+  border-radius: 10px;
+  position: fixed;
+}
+
+@media (max-width: 790px) {
+  .popup-edit-avatar {
+    width: 330px;
+  }
+}

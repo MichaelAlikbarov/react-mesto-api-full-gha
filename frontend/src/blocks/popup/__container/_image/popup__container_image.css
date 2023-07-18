@@ -1,0 +1,16 @@
+.popup__container_image {
+  border-radius: 0px;
+  max-width: 816px;
+  height: 540px;
+  visibility: hidden;
+
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 768px) {
+  .popup__container_image {
+    width: 240px;
+    height: 299px;
+  }
+}

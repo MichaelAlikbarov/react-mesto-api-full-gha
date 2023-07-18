@@ -1,0 +1,7 @@
+.form-container__signature {
+    margin: 15px auto 80px;
+    max-width: 358px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}

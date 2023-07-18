@@ -1,0 +1,12 @@
+.popup__container_type_tooltip {
+    width: 430px;
+    height: 330px;
+    margin: auto; 
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    background: #FFFFFF;
+    border-radius: 10px;
+    justify-content: center;
+    position: fixed;
+}

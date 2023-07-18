@@ -1,0 +1,24 @@
+.popup-edit-avatar__input {
+  border: 1px solid;
+  border-color: rgba(0,0,0, 0.2);
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  margin: 0 auto;
+  padding: 0;
+  padding-bottom: 13.13px;
+  width: 358px;
+
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.21;
+  color: #000000;
+}
+
+@media (max-width: 760px) {
+  .popup-edit-avatar__input {
+    max-width: 230px;
+  }
+}

@@ -1,0 +1,13 @@
+.profile__avatar-overlay {
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  left: 42%;
+  top: 40%;
+  transition: .3s ease;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  opacity: 0;
+  background: no-repeat center url(../../../images/VectorEdit.svg) rgba(0, 0, 0, 0);
+}

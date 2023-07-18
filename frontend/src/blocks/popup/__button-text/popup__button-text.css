@@ -1,0 +1,11 @@
+.popup__button-text {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.22;
+  color: #FFFFFF;
+  margin-top: 13.62px;
+  margin-bottom: 18.43px;
+  text-align: center;
+}

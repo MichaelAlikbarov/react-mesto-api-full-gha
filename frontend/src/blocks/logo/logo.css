@@ -1,0 +1,22 @@
+.logo {
+  width: 142px;
+  height: 33px;
+  margin-top: 45px;
+  margin-bottom: 41px;
+  padding: 0;
+  display: block;
+  background: url(../../images/Logo_mesto.svg) no-repeat;
+}
+
+@media (max-width: 320px) {
+  .logo {
+    width: 103.74px;
+    height: 24.4px;
+    margin-left: 27px;
+    margin-bottom: 31.6px;
+  }
+}
+
+.logo:hover {
+  cursor: pointer;
+}
