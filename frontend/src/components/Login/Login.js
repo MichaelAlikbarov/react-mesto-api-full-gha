@@ -8,7 +8,6 @@ function Login({ handleLogin }) {
     const { email, password } = values;
     e.preventDefault();
     handleLogin(email, password);
-    
   };
 
   return (
@@ -22,7 +21,7 @@ function Login({ handleLogin }) {
           type="email"
           placeholder="Email"
           required
-          value={values?.email}
+          value={values?.email || ''}
           onChange={handleChange}
         />
         <input
@@ -32,7 +31,7 @@ function Login({ handleLogin }) {
           type="password"
           placeholder="Пароль"
           required
-          value={values?.password}
+          value={values?.password || ''}
           onChange={handleChange}
         />
         <button className="form-container__button">

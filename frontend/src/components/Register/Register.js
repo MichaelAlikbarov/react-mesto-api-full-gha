@@ -22,7 +22,7 @@ export default function Register({ handleRegister }) {
           type="email"
           placeholder="Email"
           required
-          value={values.email}
+          value={values.email || ''}
           onChange={handleChange}
         />
         <input
@@ -32,7 +32,7 @@ export default function Register({ handleRegister }) {
           type="password"
           placeholder="Пароль"
           required
-          value={values.password}
+          value={values.password || ''}
           onChange={handleChange}
         />
         <button className="form-container__button">

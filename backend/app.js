@@ -5,6 +5,8 @@ const helmet = require('helmet');
 const { errors } = require('celebrate');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
+// const { logger } = require('express-winston');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 const routes = require('./routes/index');
 const errorHandler = require('./middlewares/error-handler');
 const limiter = require('./middlewares/rateLimit');
@@ -23,11 +25,15 @@ app.use(helmet());
 app.use(cookieParser());
 app.use(bodyParser.json());
 
+app.use(requestLogger);
+// app.use(logger);
+
 app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
+
 app.use(routes);
 
+app.use(errorLogger);
 app.use(errors());
-
 app.use(errorHandler);
 
 app.listen(PORT, () => {
