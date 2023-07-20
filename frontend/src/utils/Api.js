@@ -107,27 +107,12 @@ class Api {
     }
 
     changeLikeCardStatus(cardId, isLiked) {
-        // return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
-        // method: "PUT",
-        // credentials: "include",
-        // headers: this._headers,
-        // }).then(this._handleRequest).then((res) => {
-        //     this._status = isLiked ? this._addLike(res.cardId) : this._deleteLike(res.cardId);
-        //     return this._status;
-        // })
         this._status = isLiked ? this._addLike(cardId) : this._deleteLike(cardId);
         return this._status;
     }
 }
 
 export const api = new Api({
-    // baseUrl: "http://localhost:5000",
-    // headers: {
-    //     authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0YWZiNDljZDExYzk4ZjI4OTI5OTg1MyIsImlhdCI6MTY4OTMxNDgzOH0.BpyxdwmEfI3YxZWsvCizu_3uAhPjREzDFaPKyVPzeas",
-    //     "Content-Type": "application/json",
-    // },
-    // });
-
     baseUrl: "http://localhost:5000",
     headers: {
         "Content-Type": "application/json"

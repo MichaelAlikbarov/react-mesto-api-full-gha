@@ -29,17 +29,6 @@ export const authorize = (email, password) => {
   });
 };
 
-// export const getContent = (token) => {
-//   return request("users/me", {
-//     method: "GET",
-//     headers: {
-//       Accept: "application/json",
-//       "Content-Type": "application/json",
-//       Authorization: `Bearer ${token}`,
-//     },
-//   });
-// };
-
 export const getContent = () => {
   return request("users/me", {
     method: "GET",

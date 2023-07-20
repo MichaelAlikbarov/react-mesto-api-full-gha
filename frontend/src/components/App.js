@@ -90,23 +90,6 @@ function App() {
       .finally(() => {setIsTooltipUser(true)})
   }
 
-  // const checkToken = () => {
-  //   const jwt = localStorage.getItem("jwt");
-  //   auth
-  //     .getContent(jwt)
-  //     .then((data) => {
-  //       if (data) {
-  //         setIsLoggedIn(true);
-  //         setUserProfile(data.data?.email);
-  //         navigate(location.pathname);
-  //       } else {
-  //         setIsLoggedIn(false);
-  //         navigate("/signin");
-  //       }
-  //     })
-  //     .catch((err) => console.error(err));
-  // };
-
   const checkToken = () => {
     auth
       .getContent()
