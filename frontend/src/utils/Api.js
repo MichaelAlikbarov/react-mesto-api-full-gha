@@ -113,7 +113,7 @@ class Api {
 }
 
 export const api = new Api({
-    baseUrl: "https://api.mesto.almichael.nomoredomains.xyz",
+    baseUrl: "http://localhost:5000",
     headers: {
         "Content-Type": "application/json"
     }
