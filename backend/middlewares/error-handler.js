@@ -5,7 +5,7 @@ const errorHandler = (err, req, res, next) => {
       message: err.message,
     });
   } else {
-    res.status(500).send({ message: err.message || 'На сервере произошла ошибка' });
+    res.status(500).send({ message: 'На сервере произошла ошибка' });
   }
   next();
 };

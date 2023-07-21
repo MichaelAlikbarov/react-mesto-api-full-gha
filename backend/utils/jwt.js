@@ -1,10 +1,12 @@
 const jwt = require('jsonwebtoken');
 
-const JWT_SECRET = 'unique-secret-key';
+const { NODE_ENV, JWT_SECRET } = process.env;
 
-const generateToken = (id) => jwt.sign({ id }, JWT_SECRET);
+const generateToken = (id) => jwt.sign({
+  id,
+}, NODE_ENV === 'production' ? JWT_SECRET : 'unique-secret-key');
 
-const verifyToken = (token) => jwt.verify(token, JWT_SECRET, (err, decoded) => {
+const verifyToken = (token) => jwt.verify(token, NODE_ENV === 'production' ? JWT_SECRET : 'unique-secret-key', (err, decoded) => {
   if (err) return false;
   return decoded.id;
 });

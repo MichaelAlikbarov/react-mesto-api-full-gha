@@ -9,9 +9,6 @@ const UnauthorizedError = require('../errors/unauthorized-error');
 const getUsers = (req, res, next) => {
   User.find({})
     .then((users) => {
-      if (!users) {
-        throw new NotFoundError('Нет таких пользователей');
-      }
       res.status(200).send(users);
     })
     .catch(next);
@@ -22,7 +19,7 @@ const getUserId = (req, res, next) => {
   return User.findById(userId)
     .then((user) => {
       if (!user) {
-        throw new NotFoundError('Пользователь не найден');
+        return new NotFoundError('Пользователь не найден');
       }
       return res.status(200).send(user);
     })
@@ -33,21 +30,21 @@ const createUser = (req, res, next) => {
   const {
     name, about, avatar, email, password,
   } = req.body;
-
-  if (!email || !password) {
-    throw new BadRequestError('Не передан email или пароль');
-  }
   return User.findOne({ email })
     .then((user) => {
       if (user) {
-        throw new ConflictError('Пользователь уже существует');
+        return new ConflictError('Пользователь уже существует');
       }
       bcrypt.hash(password, 10, (err, hash) => User.create({
         name, about, avatar, email, password: hash,
       })
         .then((userNew) => res.status(201).send(userNew)));
     })
-    .catch(next);
+    .catch((err) => {
+      if (err.name === 11000) {
+        return next(new ConflictError('Пользователь уже существует'));
+      } next(err);
+    });
 };
 
 const updateProfile = (req, res, next) => {
@@ -81,13 +78,13 @@ const updateAvatar = (req, res, next) => {
 const login = (req, res, next) => {
   const { email, password } = req.body;
   if (!email || !password) {
-    throw new NotFoundError('Не передан email или пароль');
+    return new NotFoundError('Не передан email или пароль');
   }
 
   return User.findOne({ email }).select('+password')
     .then((user) => {
       if (!user) {
-        throw new UnauthorizedError('Такого пользователя не существует');
+        return new UnauthorizedError('Такого пользователя не существует');
       }
       bcrypt.compare(password, user.password, (err, isPasswordMatch) => {
         if (!isPasswordMatch) {
@@ -100,7 +97,13 @@ const login = (req, res, next) => {
           secure: true,
           sameSite: 'None',
         });
-        return res.status(200).send(user);
+        return res.status(200).send({
+          _id: user._id,
+          name: user.name,
+          about: user.about,
+          avatar: user.avatar,
+          email: user.email,
+        });
       });
     })
     .catch(next);

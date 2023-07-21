@@ -4,7 +4,7 @@ const UnauthorizedError = require('../errors/unauthorized-error');
 module.exports = (req, res, next) => {
   const { jwt } = req.cookies;
   if (!jwt) {
-    throw new UnauthorizedError('Необходима авторизация');
+    return next(new UnauthorizedError('Необходима авторизация'));
   }
   let payload;
   try {

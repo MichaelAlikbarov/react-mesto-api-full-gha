@@ -20,7 +20,7 @@ router.post('/signup', validationCreateUser, createUser);
 
 router.use(auth);
 
-router.use('/', userRoutes);
+router.use('/users', userRoutes);
 router.use('/cards', cardRoutes);
 
 router.use('*', (req, res, next) => {

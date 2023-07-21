@@ -1,6 +1,5 @@
 require('dotenv').config();
 const express = require('express');
-const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const helmet = require('helmet');
 const { errors } = require('celebrate');
@@ -11,9 +10,9 @@ const routes = require('./routes/index');
 const errorHandler = require('./middlewares/error-handler');
 const limiter = require('./middlewares/rateLimit');
 
-const { PORT = 5000, DB_URL = 'mongodb://127.0.0.1:27017/mestodb' } = process.env;
+const { NODE_ENV, PORT, DB_URL } = process.env;
 
-mongoose.connect(DB_URL, {
+mongoose.connect(NODE_ENV === 'production' ? DB_URL : 'mongodb://127.0.0.1:27017/mestodb', {
   useNewUrlParser: true,
 }).then(() => {
   console.log('connected to db');
@@ -23,7 +22,7 @@ const app = express();
 app.use(limiter);
 app.use(helmet());
 app.use(cookieParser());
-app.use(bodyParser.json());
+app.use(express.json());
 
 app.use(requestLogger);
 
@@ -35,6 +34,6 @@ app.use(errorLogger);
 app.use(errors());
 app.use(errorHandler);
 
-app.listen(PORT, () => {
+app.listen(NODE_ENV === 'production' ? PORT : 5000, () => {
   console.log(`server is running on port ${PORT}`);
 });

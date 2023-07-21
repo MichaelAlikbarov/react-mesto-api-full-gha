@@ -21,23 +21,20 @@ const createCard = (req, res, next) => {
           new BadRequestError()`${Object.values(err.errors)
             .map(() => err.message).join(', ')}`,
         );
-      }
-    })
-    .catch(next);
+      } next(err);
+    });
 };
 
 const deleteCard = (req, res, next) => {
-  const cardForDel = Card.findById(
+  Card.findById(
     req.params.cardId,
   )
-    .orFail(() => {
-      throw new Error('NotFound');
-    })
+    .orFail(new NotFoundError('Error: not found'))
     .then((card) => {
       if (req.user === card.owner.valueOf()) {
-        card.deleteOne({ cardForDel });
+        card.deleteOne();
       } else {
-        throw new ConflictError('Не трогай чужую карточку');
+        return new ConflictError('Не трогай чужую карточку');
       }
     })
     .then((card) => res.send({ data: card }))
@@ -57,9 +54,7 @@ const putCardLike = (req, res, next) => {
     { $addToSet: { likes: req.user } },
     { new: true },
   )
-    .orFail(() => {
-      throw new Error('NotFound');
-    })
+    .orFail(new NotFoundError('Error: not found'))
     .then((card) => res.send({ data: card }))
     .catch((err) => {
       if (err.message === 'NotFound') {
@@ -77,9 +72,7 @@ const deleteCardLike = (req, res, next) => {
     { $pull: { likes: req.user } },
     { new: true },
   )
-    .orFail(() => {
-      throw new Error('NotFound');
-    })
+    .orFail(new NotFoundError('Error: not found'))
     .then((card) => res.send({ data: card }))
     .catch((err) => {
       if (err.message === 'NotFound') {
