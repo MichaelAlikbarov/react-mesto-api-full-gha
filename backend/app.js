@@ -26,7 +26,7 @@ app.use(express.json());
 
 app.use(requestLogger);
 
-app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
+app.use(cors({ origin: 'https://mesto.almichael.nomoredomains.xyz', credentials: true }));
 
 app.use(routes);
 
@@ -35,5 +35,5 @@ app.use(errors());
 app.use(errorHandler);
 
 app.listen(NODE_ENV === 'production' ? PORT : 5000, () => {
-  console.log(`server is running on port ${PORT}`);
+  console.log('server tarted successfully');
 });
