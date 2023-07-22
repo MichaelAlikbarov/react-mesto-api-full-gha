@@ -34,7 +34,7 @@ const createUser = (req, res, next) => {
   bcrypt.hash(password, 10, (err, hash) => User.create({
     name, about, avatar, email, password: hash,
   }).then((userNew) => res.status(201).send(userNew))
-    .catch((err) => {
+    .catch(() => {
       if (err.name === 11000) {
         return next(new ConflictError('Пользователь уже существует'));
       } next(err);
@@ -71,7 +71,7 @@ const updateAvatar = (req, res, next) => {
 
 const login = (req, res, next) => {
   const { email, password } = req.body;
-  User.findOne({ email }).select('+password')
+  return User.findOne({ email }).select('+password')
     .then((user) => {
       if (!user) {
         return new UnauthorizedError('Такого пользователя не существует');
