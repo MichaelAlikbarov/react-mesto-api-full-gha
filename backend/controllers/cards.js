@@ -32,15 +32,14 @@ const deleteCard = (req, res, next) => {
     .orFail(new NotFoundError('Error: not found'))
     .then((card) => {
       if (req.user === card.owner.valueOf()) {
-        card.deleteOne();
-      } else {
-        return new ConflictError('Не трогай чужую карточку');
+        return card.deleteOne();
       }
+      throw new ConflictError('Не трогай чужую карточку');
     })
     .then((card) => res.send({ data: card }))
     .catch((err) => {
       if (err.message === 'NotFound') {
-        return next(new NotFoundError('Error: not found'));
+        return next(err);
       }
       if (err.name === 'CastError') {
         return next(new BadRequestError('Error: bad request'));
@@ -58,7 +57,7 @@ const putCardLike = (req, res, next) => {
     .then((card) => res.send({ data: card }))
     .catch((err) => {
       if (err.message === 'NotFound') {
-        return next(new NotFoundError('Error: not found'));
+        return next(err);
       }
       if (err.name === 'CastError') {
         return next(new BadRequestError('Error: bad request'));

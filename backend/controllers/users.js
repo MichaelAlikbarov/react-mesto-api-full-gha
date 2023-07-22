@@ -30,21 +30,15 @@ const createUser = (req, res, next) => {
   const {
     name, about, avatar, email, password,
   } = req.body;
-  return User.findOne({ email })
-    .then((user) => {
-      if (user) {
-        return new ConflictError('Пользователь уже существует');
-      }
-      bcrypt.hash(password, 10, (err, hash) => User.create({
-        name, about, avatar, email, password: hash,
-      })
-        .then((userNew) => res.status(201).send(userNew)));
-    })
+
+  bcrypt.hash(password, 10, (err, hash) => User.create({
+    name, about, avatar, email, password: hash,
+  }).then((userNew) => res.status(201).send(userNew))
     .catch((err) => {
       if (err.name === 11000) {
         return next(new ConflictError('Пользователь уже существует'));
       } next(err);
-    });
+    }));
 };
 
 const updateProfile = (req, res, next) => {
@@ -77,11 +71,7 @@ const updateAvatar = (req, res, next) => {
 
 const login = (req, res, next) => {
   const { email, password } = req.body;
-  if (!email || !password) {
-    return new NotFoundError('Не передан email или пароль');
-  }
-
-  return User.findOne({ email }).select('+password')
+  User.findOne({ email }).select('+password')
     .then((user) => {
       if (!user) {
         return new UnauthorizedError('Такого пользователя не существует');
@@ -116,7 +106,8 @@ const getUsersMe = (req, res, next) => {
       if (!user) {
         throw new NotFoundError('Пользователь с таким id не найден');
       }
-      // const { name, about, avatar } = user;
+      const { name, about, avatar } = user;
+      console.log(name, about, avatar);
       return res.status(200).send(user);
     })
     .catch(next);
