@@ -1,5 +1,5 @@
 import checkResponse from "./checkResponse";
-export const BASE_URL = "https://api.mesto.almichael.nomoredomains.xyz/";
+export const BASE_URL = "https://api.mesto.almichael.nomoredomains.xyz";
 
 function request(url, options) {
   return fetch(`${BASE_URL}/${url}`, options).then(checkResponse);
