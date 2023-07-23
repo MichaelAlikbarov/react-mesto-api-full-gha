@@ -26,6 +26,7 @@ function App() {
     api
       .getUserInfo()
       .then((res) => {
+        console.log(res)
         setCurrentUser(res);
       })
       .catch((err) => console.error(err));
@@ -60,7 +61,8 @@ function App() {
       .authorize(email, password)
       .then((res) => {
         // localStorage.setItem("jwt", data.token);
-        setUserProfile(res.email);
+        setCurrentUser(res);
+        setUserProfile(res.emaile, res.avatar, res.name, res.about, res._id);
         setIsLoggedIn(true);
         navigate("/");
       })

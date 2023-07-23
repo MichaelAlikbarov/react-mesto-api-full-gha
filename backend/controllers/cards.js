@@ -39,7 +39,7 @@ const deleteCard = (req, res, next) => {
     .then((card) => res.send({ data: card }))
     .catch((err) => {
       if (err.message === 'NotFound') {
-        return next(err);
+        return next(new NotFoundError('Error: not found'));
       }
       if (err.name === 'CastError') {
         return next(new BadRequestError('Error: bad request'));
@@ -57,7 +57,7 @@ const putCardLike = (req, res, next) => {
     .then((card) => res.send({ data: card }))
     .catch((err) => {
       if (err.message === 'NotFound') {
-        return next(err);
+        return next(new NotFoundError('Error: not found'));
       }
       if (err.name === 'CastError') {
         return next(new BadRequestError('Error: bad request'));

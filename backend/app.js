@@ -24,6 +24,8 @@ app.use(helmet());
 app.use(cookieParser());
 app.use(express.json());
 
+console.log(mongoose.Error);
+
 app.use(requestLogger);
 
 app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
@@ -34,6 +36,6 @@ app.use(errorLogger);
 app.use(errors());
 app.use(errorHandler);
 
-app.listen(NODE_ENV === 'production' ? PORT : 5000, () => {
+app.listen(PORT, () => {
   console.log('server started successfully');
 });
