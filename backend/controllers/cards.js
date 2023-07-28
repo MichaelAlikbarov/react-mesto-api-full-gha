@@ -18,8 +18,8 @@ const createCard = (req, res, next) => {
     .catch((err) => {
       if (err.name === 'ValidationError') {
         return next(
-          new BadRequestError()`${Object.values(err.errors)
-            .map(() => err.message).join(', ')}`,
+          new BadRequestError(`${Object.values(err.errors)
+            .map(() => err.message).join(', ')}`),
         );
       } next(err);
     });
